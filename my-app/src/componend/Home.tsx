@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { data } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // กําหนด type
 type Item = {
@@ -14,7 +17,9 @@ export default function Home() {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [items, setItems] = useState<Item[]>([]); // เก็บรายการสินค้า
-  
+
+  const navigate = useNavigate();
+
   const handleSubmit = () => {
     const newItem: Item = {
       item,
@@ -27,6 +32,14 @@ export default function Home() {
     setPrice("");
     setDescription("");
   };
+
+
+  const goToInvoice = () => {
+    navigate('/invoice', { state: { items } })
+  }
+
+
+
 
   return (
     <div className="container mx-auto w-200 border rounded-lg m-5 text-center h-full">
@@ -83,38 +96,16 @@ export default function Home() {
             >
               ยืนยัน
             </button>
+            {/* <Link
+              to="/invoice"
+              state={{ date, dueDate, items }}
+              className="bg-orange-500 my-2 p-2 border rounded cursor-pointer mx-auto flex"
+            >
+              ไปหน้า Invoice
+            </Link> */}
+            <button className="bg-orange-500 my-2 p-2 border rounded cursor-pointer mx-auto flex" onClick={goToInvoice}>ไปหน้า Invoice</button>
           </div>
         </div>
-        {/* <table className="w-full border-collapse border">
-          <thead>
-            <tr className="bg-orange-100">
-              <th className="border p-2">Item</th>
-              <th className="border p-2">Price</th>
-              <th className="border p-2">Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map((it, index) => {
-              total += it.price;
-              return (
-                <tr key={index}>
-                  <td className="border p-2">{it.item}</td>
-                  <td className="border p-2">{it.price}</td>
-                  <td className="border p-2">{it.description}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-          <tfoot>
-            <tr className="bg-orange-200 font-bold">
-              <td className="border p-2 text-right" colSpan={1}>
-                Total:
-              </td>
-              <td className="border p-2">{total}</td>
-              <td className="border p-2"></td>
-            </tr>
-          </tfoot>
-        </table> */}
       </div>
     </div>
   );
