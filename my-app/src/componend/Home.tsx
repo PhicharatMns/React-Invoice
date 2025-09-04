@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { data } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 // กําหนด type
@@ -33,13 +31,9 @@ export default function Home() {
     setDescription("");
   };
 
-
   const goToInvoice = () => {
-    navigate('/invoice', { state: { items } })
-  }
-
-
-
+    navigate("/invoice", { state: { items, date, dueDate } });
+  };
 
   return (
     <div className="container mx-auto w-200 border rounded-lg m-5 text-center h-full">
@@ -103,7 +97,12 @@ export default function Home() {
             >
               ไปหน้า Invoice
             </Link> */}
-            <button className="bg-orange-500 my-2 p-2 border rounded cursor-pointer mx-auto flex" onClick={goToInvoice}>ไปหน้า Invoice</button>
+            <button
+              className="bg-orange-500 my-2 p-2 border rounded cursor-pointer mx-auto flex"
+              onClick={goToInvoice}
+            >
+              ไปหน้า Invoice
+            </button>
           </div>
         </div>
       </div>
